@@ -6,15 +6,20 @@ const nodeHtmlToImage = require('node-html-to-image');
 const fs = require('fs');
 const express = require('express');
 
+const rule = new schedule.RecurrenceRule();
+rule.tz = 'Asia/Ho_Chi_Minh';
+rule.minute = 47;
+rule.hour = 15;
+
 const app = express();
 
 app.use(express.static('public'));
 
-app.listen('8080', () => {
+app.listen('8081', () => {
   console.log('Server is running on port 8080');
 })
 
-const DOMAIN = 'https://xsmb-bot.nguyenhuuvu.dev';
+const DOMAIN = 'https://manufactured-visitor-bread-pavilion.trycloudflare.com';
 
 const convertHtmlToImage = (html, css) => {
   return new Promise((resolve, reject) => {
@@ -70,7 +75,7 @@ const deleteImage = (image) => {
 };
 
 
-const job = schedule.scheduleJob('30 18 * * *', crawlXsmb);
+const job = schedule.scheduleJob(rule, crawlXsmb);
 
 async function crawlXsmb() {
     const response = await axios.get('https://xsmn.me/xsmb-sxmb-kqxsmb-xstd-xshn-ket-qua-xo-so-mien-bac.html');
@@ -118,4 +123,4 @@ async function sendMessage(image) {
     });
 }
 
-// crawlXsmb()
+crawlXsmb()
