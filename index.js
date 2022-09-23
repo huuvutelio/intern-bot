@@ -86,7 +86,7 @@ async function crawlXsmb() {
   const result = await convertHtmlToImage(title + table, style);
   if (result.status) {
     await sendMessage(`${DOMAIN}/${result.image}`);
-    setTimeout(() => deleteImage(result.image), 5000);
+    // setTimeout(() => deleteImage(result.image), 5000);
   }
 }
 
