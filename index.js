@@ -19,7 +19,7 @@ app.listen('8081', () => {
   console.log('Server is running on port 8080');
 })
 
-const DOMAIN = 'https://manufactured-visitor-bread-pavilion.trycloudflare.com';
+const DOMAIN = 'https://intern-bot.onrender.com';
 
 const convertHtmlToImage = (html, css) => {
   return new Promise((resolve, reject) => {
