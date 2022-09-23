@@ -8,8 +8,8 @@ const express = require('express');
 
 const rule = new schedule.RecurrenceRule();
 rule.tz = 'Asia/Ho_Chi_Minh';
-rule.minute = 47;
-rule.hour = 15;
+rule.minute = 30;
+rule.hour = 18;
 
 const app = express();
 
@@ -124,3 +124,27 @@ async function sendMessage(image) {
 }
 
 crawlXsmb()
+
+
+
+async function meetingReminder() {
+    await axios.post('https://chat.googleapis.com/v1/spaces/AAAAKosJBuc/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=LkZ550J53hR-vCzyGT62fEsV6hl4u2wL8sZ8tiKWRFw%3D', {
+        "text": `Nhắc nhở: chuẩn bị vào họp nào ae.`
+    });
+}
+
+
+const rule2 = new schedule.RecurrenceRule();
+rule2.tz = 'Asia/Ho_Chi_Minh';
+rule2.minute = 28;
+rule2.hour = 9;
+rule2.dayOfWeek = [new schedule.Range(1, 5)];
+
+const rule3 = new schedule.RecurrenceRule();
+rule3.tz = 'Asia/Ho_Chi_Minh';
+rule3.minute = 58;
+rule3.hour = 15;
+rule3.dayOfWeek = [new schedule.Range(1, 5)];
+
+schedule.scheduleJob(rule2, meetingReminder);
+schedule.scheduleJob(rule3, meetingReminder);
